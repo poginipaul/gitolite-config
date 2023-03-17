@@ -12,21 +12,12 @@ RUN useradd -m -d /home/git -s /bin/bash -p "" git && \
     chown git:git /home/git/.ssh && \
     chmod 700 /home/git/.ssh
 
-#RUN mkdir -p/home/git/bin
-
-# Copy authorized_keys file to .ssh directory
-#COPY authorized_keys /home/git/.ssh/
-
 COPY woody.pub /home/git/tech.pub
 
 # Clone and install Gitolite
 USER git
+
 RUN mkdir -p /home/git/bin
-    #git clone https://github.com/sitaramc/gitolite.git /tmp/gitolite && \
-    #mkdir -p /home/git/bin
-    #/tmp/gitolite/install -ln /home/git/bin && \
-    #/tmp/gitolite/setup -pk /home/git/id_rsa.pub
-    #rm -rf /tmp/gitolite
 
 COPY ./gitolite/ /home/git/gitolite/
 
